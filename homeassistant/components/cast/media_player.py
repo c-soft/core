@@ -78,12 +78,7 @@ _LOGGER = logging.getLogger(__name__)
 CAST_SPLASH = "https://www.home-assistant.io/images/cast/splash.png"
 
 SUPPORT_CAST = (
-    SUPPORT_PAUSE
-    | SUPPORT_PLAY
-    | SUPPORT_PLAY_MEDIA
-    | SUPPORT_STOP
-    | SUPPORT_TURN_OFF
-    | SUPPORT_TURN_ON
+    SUPPORT_PAUSE | SUPPORT_PLAY | SUPPORT_PLAY_MEDIA | SUPPORT_STOP | SUPPORT_TURN_OFF
 )
 
 
@@ -676,6 +671,12 @@ class CastDevice(MediaPlayerEntity):
         """Flag media player features that are supported."""
         support = SUPPORT_CAST
         media_status = self._media_status()[0]
+
+        if (
+            self._chromecast
+            and self._chromecast.cast_type == pychromecast.const.CAST_TYPE_CHROMECAST
+        ):
+            support |= SUPPORT_TURN_ON
 
         if (
             self.cast_status
