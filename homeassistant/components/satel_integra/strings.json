@@ -187,6 +187,12 @@
   },
   "entity": {
     "binary_sensor": {
+      "alarm": {
+        "name": "Alarm"
+      },
+      "alarm_memory": {
+        "name": "Alarm memory"
+      },
       "bypass": {
         "name": "Bypass"
       },

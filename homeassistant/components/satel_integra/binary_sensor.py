@@ -61,6 +61,18 @@ ZONE_BINARY_SENSORS = (
         entity_registry_enabled_default=False,
         is_on_fn=lambda data: data.bypassed,
     ),
+    SatelIntegraZoneBinarySensorEntityDescription(
+        key="alarm",
+        translation_key="alarm",
+        entity_registry_enabled_default=False,
+        is_on_fn=lambda data: data.alarm,
+    ),
+    SatelIntegraZoneBinarySensorEntityDescription(
+        key="alarm_memory",
+        translation_key="alarm_memory",
+        entity_registry_enabled_default=False,
+        is_on_fn=lambda data: data.alarm_memory,
+    ),
 )
 
 

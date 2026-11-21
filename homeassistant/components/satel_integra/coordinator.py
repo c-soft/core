@@ -86,6 +86,8 @@ class SatelIntegraZoneData:
     violated: bool | None
     tampered: bool | None
     bypassed: bool | None
+    alarm: bool | None
+    alarm_memory: bool | None
 
 
 class SatelIntegraZonesCoordinator(
@@ -118,6 +120,8 @@ class SatelIntegraZonesCoordinator(
                 violated=zone_state.violated,
                 tampered=zone_state.tampered,
                 bypassed=zone_state.bypassed,
+                alarm=zone_state.alarm,
+                alarm_memory=zone_state.alarm_memory,
             )
             for zone, zone_state in zone_states.items()
         }
