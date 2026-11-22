@@ -8,6 +8,7 @@ from homeassistant.const import EVENT_HOMEASSISTANT_STOP, Platform
 from homeassistant.core import Event, HomeAssistant, callback
 from homeassistant.helpers import config_validation as cv, device_registry as dr
 from homeassistant.helpers.entity_registry import RegistryEntry, async_migrate_entries
+from homeassistant.helpers.typing import ConfigType
 
 from .client import SatelClient
 from .const import (
@@ -32,6 +33,7 @@ from .coordinator import (
     SatelIntegraTemperaturesCoordinator,
     SatelIntegraZonesCoordinator,
 )
+from .services import async_setup_services
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -43,6 +45,12 @@ PLATFORMS = [
 ]
 
 CONFIG_SCHEMA = cv.removed(DOMAIN, raise_if_present=False)
+
+
+async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
+    """Set up the Satel Integra services."""
+    async_setup_services(hass)
+    return True
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: SatelConfigEntry) -> None:

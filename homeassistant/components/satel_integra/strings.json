@@ -283,6 +283,9 @@
     "missing_alarm_access_code": {
       "message": "Cannot disarm the alarm panel because no user code was provided."
     },
+    "missing_clock_access_code": {
+      "message": "Cannot set the panel clock because no user code is configured for this Satel Integra entry. Configure a code in the integration options to enable setting the clock."
+    },
     "missing_output_access_code": {
       "message": "Cannot control switchable outputs because no user code is configured for this Satel Integra entry. Configure a code in the integration options to enable output control."
     },
@@ -316,6 +319,22 @@
         "2": "2 - No interior zones",
         "3": "3 - No interior zones or entry delay"
       }
+    }
+  },
+  "services": {
+    "set_time": {
+      "description": "Sets the date and time on the alarm panel.",
+      "fields": {
+        "config_entry_id": {
+          "description": "The Satel Integra integration ID.",
+          "name": "Config entry"
+        },
+        "datetime": {
+          "description": "The date and time to set. The time zone of the Home Assistant instance is assumed. If omitted, the current date and time is used.",
+          "name": "Date & time"
+        }
+      },
+      "name": "Set date & time"
     }
   }
 }

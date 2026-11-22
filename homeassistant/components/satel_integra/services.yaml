@@ -1,0 +1,12 @@
+set_time:
+  fields:
+    config_entry_id:
+      required: true
+      selector:
+        config_entry:
+          integration: satel_integra
+    datetime:
+      required: false
+      example: "2026-11-22 15:00:00"
+      selector:
+        datetime:
