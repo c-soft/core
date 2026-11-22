@@ -73,6 +73,18 @@ ZONE_BINARY_SENSORS = (
         entity_registry_enabled_default=False,
         is_on_fn=lambda data: data.alarm_memory,
     ),
+    SatelIntegraZoneBinarySensorEntityDescription(
+        key="tamper_alarm",
+        translation_key="tamper_alarm",
+        entity_registry_enabled_default=False,
+        is_on_fn=lambda data: data.tamper_alarm,
+    ),
+    SatelIntegraZoneBinarySensorEntityDescription(
+        key="tamper_alarm_memory",
+        translation_key="tamper_alarm_memory",
+        entity_registry_enabled_default=False,
+        is_on_fn=lambda data: data.tamper_alarm_memory,
+    ),
 )
 
 

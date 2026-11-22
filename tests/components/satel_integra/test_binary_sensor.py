@@ -177,6 +177,8 @@ async def test_binary_sensor_initial_state(
         mock_satel.state.zones[1].bypassed = device_state
         mock_satel.state.zones[1].alarm = device_state
         mock_satel.state.zones[1].alarm_memory = device_state
+        mock_satel.state.zones[1].tamper_alarm = device_state
+        mock_satel.state.zones[1].tamper_alarm_memory = device_state
         get_output_changed_callback(mock_satel)()
         get_zone_changed_callback(mock_satel)()
 
@@ -190,6 +192,11 @@ async def test_binary_sensor_initial_state(
     assert hass.states.get("binary_sensor.zone_bypass").state == expected_state
     assert hass.states.get("binary_sensor.zone_alarm").state == expected_state
     assert hass.states.get("binary_sensor.zone_alarm_memory").state == expected_state
+    assert hass.states.get("binary_sensor.zone_tamper_alarm").state == expected_state
+    assert (
+        hass.states.get("binary_sensor.zone_tamper_alarm_memory").state
+        == expected_state
+    )
 
 
 async def test_output_callback(
@@ -321,6 +328,8 @@ async def test_other_specific_trouble_sensors_disabled_by_default(
         ("binary_sensor.zone_bypass", "bypassed"),
         ("binary_sensor.zone_alarm", "alarm"),
         ("binary_sensor.zone_alarm_memory", "alarm_memory"),
+        ("binary_sensor.zone_tamper_alarm", "tamper_alarm"),
+        ("binary_sensor.zone_tamper_alarm_memory", "tamper_alarm_memory"),
     ],
 )
 async def test_zone_status_callback(
@@ -350,7 +359,14 @@ async def test_zone_statuses_disabled_by_default(
     zone = entity_registry.async_get("binary_sensor.zone")
     assert zone is not None
     assert zone.disabled_by is None
-    for key in ("tamper", "bypass", "alarm", "alarm_memory"):
+    for key in (
+        "tamper",
+        "bypass",
+        "alarm",
+        "alarm_memory",
+        "tamper_alarm",
+        "tamper_alarm_memory",
+    ):
         entity_id = entity_registry.async_get_entity_id(
             "binary_sensor", DOMAIN, f"1234567890_zones_1_{key}"
         )
